@@ -13,19 +13,27 @@ apply_custom_css()
 # Define Pages
 pages = {
     "Navigation": [
-        st.Page("views/home.py", title="Home", icon=":material/home:", default=True),
-        st.Page("views/patient_prediction.py", title="Patient Prediction", icon=":material/clinical_notes:"),
-        st.Page("views/prediction_result.py", title="Prediction Result", icon=":material/health_and_safety:"),
-        st.Page("views/eda_dashboard.py", title="EDA Dashboard", icon=":material/analytics:"),
-        st.Page("views/model_performance.py", title="Model Performance", icon=":material/query_stats:"),
-        st.Page("views/feature_importance.py", title="Feature Importance", icon=":material/psychology:"),
-        st.Page("views/about.py", title="About & Disclaimer", icon=":material/info:")
+        st.Page("views/home.py", title="Home", icon="🏠", default=True),
+        st.Page("views/patient_prediction.py", title="Patient Prediction", icon="🩺"),
+        st.Page("views/prediction_result.py", title="Prediction Result", icon="📊"),
+        st.Page("views/eda_dashboard.py", title="EDA Dashboard", icon="📈"),
+        st.Page("views/model_performance.py", title="Model Performance", icon="⚙️"),
+        st.Page("views/feature_importance.py", title="Feature Importance", icon="🔑"),
+        st.Page("views/about.py", title="About & Disclaimer", icon="ℹ️")
     ]
 }
 
 with st.sidebar:
-    st.markdown("### SmartCare AI")
-    st.markdown("*Disease Risk Prediction*")
+    st.markdown(
+        """
+        <div class='sidebar-brand'>
+            <div class='brand-logo'>🏥</div>
+            <div class='brand-title'>SmartCare AI</div>
+        </div>
+        <div class='brand-subtitle'>Disease Risk Prediction</div>
+        """,
+        unsafe_allow_html=True,
+    )
     st.divider()
 
     pg = st.navigation(pages)
