@@ -9,8 +9,12 @@ from utils.model_utils import (
 )
 from utils.ui_utils import render_footer, render_page_header
 
-st.markdown("<div class='section-eyebrow'>Clinical Input</div>", unsafe_allow_html=True)
-render_page_header("Patient Disease Risk Prediction", "Enter patient details to estimate the disease-risk category.", icon="stethoscope")
+render_page_header(
+    "Patient Disease Risk Prediction",
+    "Enter patient details to estimate the disease-risk category.",
+    eyebrow="CLINICAL INPUT",
+    icon="stethoscope",
+)
 
 raw_df = load_dataset()
 
