@@ -21,9 +21,9 @@ with col1:
 with col2:
     st.markdown("""
     <div class='glass-card'>
-        <h3 style='color: #6C5CE7;'>Insights</h3>
+        <h3 class='insight-title'>Insights</h3>
         <p>Permutation importance measures how much model performance decreases when each feature is shuffled.</p>
-        <hr style='border: 1px solid rgba(108,92,231,0.1);'>
+        <hr>
         <p><i>These values describe global model behaviour and do not establish medical causation.</i></p>
         <br>
         <h4>Key Indicators:</h4>

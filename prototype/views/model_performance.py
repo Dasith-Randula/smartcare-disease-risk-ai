@@ -17,7 +17,7 @@ def show_img(filename):
 # Top: Best model card
 st.markdown("""
 <div class='glass-card'>
-    <h4 style='margin:0; color: #4d665b;'>Best Model: Logistic Regression</h4>
+    <h4 class='metric-title'>Best Model: Logistic Regression</h4>
 </div>
 """, unsafe_allow_html=True)
 

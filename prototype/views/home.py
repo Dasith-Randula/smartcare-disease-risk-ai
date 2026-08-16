@@ -1,7 +1,7 @@
 import streamlit as st
 from utils.ui_utils import render_footer
 
-st.markdown("<h4 style='color: #7e948a;'>AI-Powered Healthcare Intelligence</h4>", unsafe_allow_html=True)
+st.markdown("<h4 class='section-eyebrow'>AI-Powered Healthcare Intelligence</h4>", unsafe_allow_html=True)
 st.title("SmartCare AI")
 st.subheader("Disease Risk Prediction System")
 
@@ -20,8 +20,11 @@ with col1:
 
 with col2:
     st.markdown("""
-    <div class="orb-container">
-        <div class="orb">✚</div>
+    <div class="med-mark-wrap">
+        <div class="med-mark-dot dot-a"></div>
+        <div class="med-mark-dot dot-b"></div>
+        <div class="med-mark-dot dot-c"></div>
+        <div class="med-mark-core">✚</div>
     </div>
     """, unsafe_allow_html=True)
 
