@@ -25,8 +25,13 @@ pages = {
 
 # Sidebar UI
 with st.sidebar:
-    st.markdown("### 🏥 SmartCare AI")
-    st.markdown("*Disease Risk Prediction*")
+    st.markdown("""
+    <div class='sidebar-brand'>
+        <div class='brand-logo'>🏥</div>
+        <div class='brand-title'>SmartCare AI</div>
+    </div>
+    <div class='brand-subtitle'>Disease Risk Prediction</div>
+    """, unsafe_allow_html=True)
     st.divider()
     
     # Navigation Router

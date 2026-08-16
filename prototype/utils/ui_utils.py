@@ -1,47 +1,65 @@
 import streamlit as st
 
 def apply_custom_css():
-    """Injects custom CSS for themed glassmorphism and consistent contrast."""
+    """Injects modern dashboard CSS with light/dark parity."""
     is_dark = st.session_state.get('theme', 'Light') == 'Dark'
     
     if is_dark:
-        bg_color = "#060a12"
-        card_bg = "rgba(16,24,38,0.86)"
-        text_primary = "#edf4ff"
-        text_muted = "#b8c5dc"
-        border_color = "rgba(116,204,176,0.26)"
-        accent = "#74ccb0"
-        accent_soft = "rgba(116,204,176,0.22)"
-        button_bg = "#74ccb0"
-        button_text = "#081115"
-        line_color = "rgba(184,197,220,0.28)"
-        sidebar_bg = "linear-gradient(180deg, #0d1727 0%, #0a1220 100%)"
-        sidebar_border = "rgba(116,204,176,0.24)"
-        nav_text = "#e7f1ff"
-        nav_hover = "rgba(116,204,176,0.18)"
-        nav_active = "rgba(116,204,176,0.28)"
+        bg_color = "#0f1827"
+        bg_accent = "radial-gradient(920px 540px at 92% -5%, rgba(53,210,167,0.16), transparent 62%), radial-gradient(860px 560px at -8% 112%, rgba(88,133,229,0.16), transparent 62%)"
+        card_bg = "#152235"
+        card_shadow = "0 16px 38px rgba(0, 0, 0, 0.34)"
+        text_primary = "#e9eff8"
+        text_muted = "#a7b8cf"
+        border_color = "#2a3a50"
+        accent = "#39c39a"
+        accent_soft = "rgba(57,195,154,0.16)"
+        button_bg = "#33b78f"
+        button_text = "#07110d"
+        line_color = "rgba(180,197,224,0.24)"
+        sidebar_bg = "linear-gradient(180deg, #0f1f2f 0%, #0d1928 55%, #0a1623 100%)"
+        sidebar_border = "#233347"
+        nav_text = "#dce8f8"
+        nav_hover = "rgba(57,195,154,0.14)"
+        nav_active = "#1f6f5e"
+        nav_active_text = "#f5fffb"
+        panel_subtle = "#111d2e"
+        input_bg = "#101c2d"
     else:
-        bg_color = "#f4f8fb"
-        card_bg = "rgba(255,255,255,0.88)"
-        text_primary = "#1d2a39"
-        text_muted = "#4c6075"
-        border_color = "rgba(86,177,148,0.24)"
-        accent = "#3f8e75"
-        accent_soft = "rgba(63,142,117,0.16)"
-        button_bg = "#3f8e75"
+        bg_color = "#f6f8fb"
+        bg_accent = "radial-gradient(900px 520px at 100% -8%, rgba(183,233,214,0.35), transparent 62%), radial-gradient(880px 560px at -10% 108%, rgba(203,220,247,0.35), transparent 62%)"
+        card_bg = "#ffffff"
+        card_shadow = "0 12px 28px rgba(16, 35, 57, 0.08)"
+        text_primary = "#1f2a37"
+        text_muted = "#6a7587"
+        border_color = "#e6ebf2"
+        accent = "#0f6b5a"
+        accent_soft = "rgba(15,107,90,0.11)"
+        button_bg = "#0f6b5a"
         button_text = "#ffffff"
-        line_color = "rgba(29,42,57,0.18)"
-        sidebar_bg = "linear-gradient(180deg, #eef3fb 0%, #e7eef9 100%)"
-        sidebar_border = "rgba(29,42,57,0.14)"
-        nav_text = "#1d2a39"
-        nav_hover = "rgba(63,142,117,0.14)"
-        nav_active = "rgba(63,142,117,0.24)"
+        line_color = "rgba(31,42,55,0.12)"
+        sidebar_bg = "#ffffff"
+        sidebar_border = "#e7edf3"
+        nav_text = "#354458"
+        nav_hover = "#f3f7f6"
+        nav_active = "#0f6b5a"
+        nav_active_text = "#ffffff"
+        panel_subtle = "#f3f7fa"
+        input_bg = "#fbfdff"
 
     css = f"""
     <style>
+    [data-testid="stAppViewContainer"],
+    .stApp,
+    .stApp * {{
+        font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    }}
+
     :root {{
         --sc-bg: {bg_color};
+        --sc-bg-accent: {bg_accent};
         --sc-card-bg: {card_bg};
+        --sc-card-shadow: {card_shadow};
         --sc-text: {text_primary};
         --sc-text-muted: {text_muted};
         --sc-border: {border_color};
@@ -55,13 +73,27 @@ def apply_custom_css():
         --sc-nav-text: {nav_text};
         --sc-nav-hover: {nav_hover};
         --sc-nav-active: {nav_active};
+        --sc-nav-active-text: {nav_active_text};
+        --sc-panel-subtle: {panel_subtle};
+        --sc-input-bg: {input_bg};
     }}
+
+    [data-testid="stHeader"] {{
+        background: transparent;
+    }}
+
     .stApp {{
         background: var(--sc-bg);
-        background-image: radial-gradient(at 0% 0%, rgba(108,92,231,0.1) 0px, transparent 50%),
-                          radial-gradient(at 100% 0%, rgba(34,184,207,0.1) 0px, transparent 50%);
+        background-image: var(--sc-bg-accent);
         color: var(--sc-text);
     }}
+
+    .main .block-container {{
+        max-width: 1200px;
+        padding-top: 1.1rem;
+        padding-bottom: 2.4rem;
+    }}
+
     .stApp p,
     .stApp li,
     .stApp span,
@@ -75,19 +107,65 @@ def apply_custom_css():
     .stApp div {{
         color: var(--sc-text);
     }}
+
+    h1 {{
+        font-size: clamp(2rem, 3.4vw, 3rem) !important;
+        letter-spacing: -0.02em;
+        font-weight: 800;
+        margin-bottom: 0.2rem;
+    }}
+    h2 {{
+        letter-spacing: -0.015em;
+    }}
+    h3 {{
+        letter-spacing: -0.01em;
+    }}
+
     .glass-card {{
         background: var(--sc-card-bg);
         backdrop-filter: blur(12px);
         border: 1px solid var(--sc-border);
-        border-radius: 14px;
+        border-radius: 18px;
         padding: 24px;
-        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        box-shadow: var(--sc-card-shadow);
         transition: all 0.3s ease;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }}
     .glass-card:hover {{
-        transform: translateY(-3px);
-        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
+        transform: translateY(-4px);
+    }}
+
+    .surface-card {{
+        background: var(--sc-panel-subtle);
+        border: 1px solid var(--sc-border);
+        border-radius: 18px;
+        box-shadow: var(--sc-card-shadow);
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        margin-top: 2rem;
+    }}
+    .kpi-card {{
+        border-radius: 16px;
+        border: 1px solid var(--sc-border);
+        box-shadow: var(--sc-card-shadow);
+        padding: 18px;
+        min-height: 118px;
+        margin-top: 1rem;
+    }}
+    .kpi-blue {{ background: linear-gradient(135deg, rgba(157,210,245,0.32), rgba(157,210,245,0.14)); }}
+    .kpi-pink {{ background: linear-gradient(135deg, rgba(236,184,232,0.32), rgba(236,184,232,0.12)); }}
+    .kpi-green {{ background: linear-gradient(135deg, rgba(173,234,196,0.34), rgba(173,234,196,0.12)); }}
+    .kpi-amber {{ background: linear-gradient(135deg, rgba(246,219,168,0.35), rgba(246,219,168,0.12)); }}
+    .kpi-label {{
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: var(--sc-text-muted) !important;
+    }}
+    .kpi-value {{
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.1;
+        margin-top: 0.35rem;
     }}
 
     .section-eyebrow {{
@@ -122,6 +200,50 @@ def apply_custom_css():
         border-top: 1px solid var(--sc-line);
     }}
 
+    .stTabs [data-baseweb="tab-list"] {{
+        gap: 0.45rem;
+        background: var(--sc-card-bg);
+        border: 1px solid var(--sc-border);
+        border-radius: 14px;
+        padding: 0.35rem;
+        width: fit-content;
+    }}
+    .stTabs [data-baseweb="tab"] {{
+        border-radius: 10px;
+        font-weight: 600;
+        color: var(--sc-text-muted);
+        height: 2.3rem;
+        padding: 0 0.95rem;
+    }}
+    .stTabs [aria-selected="true"] {{
+        background: var(--sc-accent-soft) !important;
+        color: var(--sc-text) !important;
+    }}
+
+    [data-testid="stForm"] {{
+        background: var(--sc-card-bg);
+        border: 1px solid var(--sc-border);
+        border-radius: 18px;
+        padding: 1rem 1rem 0.6rem 1rem;
+        box-shadow: var(--sc-card-shadow);
+    }}
+
+    .stSelectbox > div > div,
+    .stDateInput > div > div,
+    .stNumberInput > div > div,
+    .stTextInput > div > div,
+    [data-baseweb="select"] > div {{
+        background: var(--sc-input-bg) !important;
+        border: 1px solid var(--sc-border) !important;
+        border-radius: 12px !important;
+    }}
+    .stTextInput input,
+    .stNumberInput input,
+    .stDateInput input,
+    [data-baseweb="select"] span {{
+        color: var(--sc-text) !important;
+    }}
+
     .stButton > button,
     .stFormSubmitButton > button,
     [data-testid="stBaseButton-primary"],
@@ -130,6 +252,10 @@ def apply_custom_css():
         background: var(--sc-button-bg) !important;
         border: 1px solid color-mix(in srgb, var(--sc-button-bg), #000 18%) !important;
         font-weight: 700 !important;
+        border-radius: 12px !important;
+        min-height: 2.7rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }}
     .stButton > button:hover,
     .stFormSubmitButton > button:hover,
@@ -152,18 +278,19 @@ def apply_custom_css():
     }}
 
     [data-testid="stSidebarNav"] {{
-        padding-top: 0.2rem;
+        padding-top: 0.25rem;
     }}
     [data-testid="stSidebarNav"] ul {{
-        gap: 0.36rem;
+        gap: 0.34rem;
     }}
     [data-testid="stSidebarNav"] a,
     [data-testid="stSidebarNav"] button {{
         border-radius: 12px !important;
         padding: 0.46rem 0.68rem !important;
-        border: 1px solid transparent !important;
+        border: 1px solid var(--sc-sidebar-border) !important;
         color: var(--sc-nav-text) !important;
         transition: all 0.2s ease !important;
+        font-weight: 600;
     }}
     [data-testid="stSidebarNav"] a:hover,
     [data-testid="stSidebarNav"] button:hover {{
@@ -174,13 +301,54 @@ def apply_custom_css():
     [data-testid="stSidebarNav"] a[aria-current="page"],
     [data-testid="stSidebarNav"] button[aria-current="page"] {{
         background: var(--sc-nav-active) !important;
-        border-color: var(--sc-sidebar-border) !important;
+        border-color: var(--sc-nav-active) !important;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
         font-weight: 700 !important;
+    }}
+    [data-testid="stSidebarNav"] a[aria-current="page"] *,
+    [data-testid="stSidebarNav"] button[aria-current="page"] * {{
+        color: var(--sc-nav-active-text) !important;
     }}
 
     [data-testid="stSidebar"] [role="radiogroup"] label {{
         color: var(--sc-nav-text) !important;
+    }}
+    [data-testid="stSidebar"] [role="radiogroup"] > label {{
+        background: color-mix(in srgb, var(--sc-nav-hover), #ffffff 45%);
+        border: 1px solid var(--sc-sidebar-border);
+        border-radius: 10px;
+        padding: 0.35rem 0.55rem;
+        margin-bottom: 0.3rem;
+    }}
+
+    .sidebar-brand {{
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.2rem;
+    }}
+    .brand-logo {{
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        background: var(--sc-accent-soft);
+        border: 1px solid var(--sc-sidebar-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--sc-accent) !important;
+    }}
+    .brand-title {{
+        font-size: 1.12rem;
+        font-weight: 800;
+        color: var(--sc-nav-text) !important;
+    }}
+    .brand-subtitle {{
+        margin-top: -0.15rem;
+        margin-left: 2.65rem;
+        color: color-mix(in srgb, var(--sc-nav-text), #ffffff 20%) !important;
+        font-size: 0.84rem;
     }}
 
     /* Decorated medical mark */

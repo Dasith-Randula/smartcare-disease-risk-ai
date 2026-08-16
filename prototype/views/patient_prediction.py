@@ -4,7 +4,11 @@ from utils.model_utils import load_model_and_encoder, engineer_features, predict
 from utils.ui_utils import render_footer
 
 st.title("Patient Disease Risk Prediction")
-st.markdown("Enter patient details to estimate the disease-risk category.")
+st.markdown("""
+<div class='surface-card'>
+Enter patient details to estimate the disease-risk category.
+</div>
+""", unsafe_allow_html=True)
 
 df = load_dataset()
 

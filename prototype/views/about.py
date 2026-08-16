@@ -2,6 +2,11 @@ import streamlit as st
 from utils.ui_utils import render_footer
 
 st.title("About & Disclaimer")
+st.markdown("""
+<div class='surface-card'>
+Project context, architecture summary, and operational boundaries for responsible usage.
+</div>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 <div class='glass-card'>

@@ -16,7 +16,7 @@ else:
     color = colors.get(pred, "#6C5CE7")
 
     st.markdown(f"""
-    <div class='glass-card' style='text-align: center; border-top: 5px solid {color};'>
+    <div class='glass-card prediction-card' style='border-top: 5px solid {color};'>
         <h3>Disease Risk Level</h3>
         <h1 style='color: {color};'>{pred.upper()} RISK</h1>
     </div>

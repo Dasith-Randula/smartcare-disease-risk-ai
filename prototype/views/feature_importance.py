@@ -5,6 +5,11 @@ from PIL import Image
 import os
 
 st.title("Feature Importance")
+st.markdown("""
+<div class='surface-card'>
+Understand which patient and hospital features influence model predictions the most.
+</div>
+""", unsafe_allow_html=True)
 
 def show_img(filename):
     path = get_figure_path(filename)

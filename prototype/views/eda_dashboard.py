@@ -5,6 +5,11 @@ from PIL import Image
 import os
 
 st.title("EDA Dashboard")
+st.markdown("""
+<div class='surface-card'>
+Explore distributions, feature relationships, and class patterns from the SmartCare dataset.
+</div>
+""", unsafe_allow_html=True)
 
 tabs = st.tabs(["Overview", "Distributions", "Relationships", "Categorical", "Heatmap"])
 
