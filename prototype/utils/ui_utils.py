@@ -5,23 +5,23 @@ def apply_custom_css():
     is_dark = st.session_state.get('theme', 'Light') == 'Dark'
     
     if is_dark:
-        bg_color = "#0f1827"
+        bg_color = "#101011"
         bg_accent = "radial-gradient(920px 540px at 92% -5%, rgba(53,210,167,0.16), transparent 62%), radial-gradient(860px 560px at -8% 112%, rgba(88,133,229,0.16), transparent 62%)"
         card_bg = "#152235"
         card_shadow = "0 16px 38px rgba(0, 0, 0, 0.34)"
         text_primary = "#e9eff8"
         text_muted = "#a7b8cf"
         border_color = "#2a3a50"
-        accent = "#39c39a"
+        accent = "#3980c3"
         accent_soft = "rgba(57,195,154,0.16)"
-        button_bg = "#33b78f"
+        button_bg = "#567991"
         button_text = "#07110d"
         line_color = "rgba(180,197,224,0.24)"
-        sidebar_bg = "linear-gradient(180deg, #0f1f2f 0%, #0d1928 55%, #0a1623 100%)"
-        sidebar_border = "#233347"
+        sidebar_bg = "linear-gradient(180deg, #161616 0%, #0d0d0d 55%, #000000 100%)"
+        sidebar_border = "#424445"
         nav_text = "#dce8f8"
-        nav_hover = "rgba(57,195,154,0.14)"
-        nav_active = "#1f6f5e"
+        nav_hover = "#2A2B2B"
+        nav_active = "#567991"
         nav_active_text = "#f5fffb"
         panel_subtle = "#111d2e"
         input_bg = "#101c2d"
@@ -30,19 +30,19 @@ def apply_custom_css():
         bg_accent = "radial-gradient(900px 520px at 100% -8%, rgba(183,233,214,0.35), transparent 62%), radial-gradient(880px 560px at -10% 108%, rgba(203,220,247,0.35), transparent 62%)"
         card_bg = "#ffffff"
         card_shadow = "0 12px 28px rgba(16, 35, 57, 0.08)"
-        text_primary = "#1f2a37"
+        text_primary = "#1D1E1F"
         text_muted = "#6a7587"
         border_color = "#e6ebf2"
-        accent = "#0f6b5a"
+        accent = "#3980c3"
         accent_soft = "rgba(15,107,90,0.11)"
-        button_bg = "#0f6b5a"
+        button_bg = "#567991"
         button_text = "#ffffff"
         line_color = "rgba(31,42,55,0.12)"
         sidebar_bg = "#ffffff"
         sidebar_border = "#e7edf3"
         nav_text = "#354458"
         nav_hover = "#f3f7f6"
-        nav_active = "#0f6b5a"
+        nav_active = "#567991"
         nav_active_text = "#ffffff"
         panel_subtle = "#f3f7fa"
         input_bg = "#fbfdff"
@@ -363,17 +363,18 @@ def apply_custom_css():
         width: 138px;
         height: 138px;
         border-radius: 50%;
-        background: radial-gradient(circle at 28% 25%, #9be3cb, #3f8e75 72%);
-        box-shadow: 0 26px 46px rgba(63, 142, 117, 0.33), inset -12px -12px 24px rgba(6, 10, 18, 0.28);
+        background: radial-gradient(circle at 28% 25%, #9bc2e3, #3f688e 72%);
+        box-shadow: 0 26px 46px rgba(63, 104, 142, 0.33), inset -12px -12px 24px rgba(6, 10, 18, 0.28);
         display: flex;
         justify-content: center;
         align-items: center;
-        color: #f7fffc;
+        color: #f7faff;
         font-size: 52px;
         font-weight: 800;
         z-index: 2;
         animation: medFloat 5s ease-in-out infinite;
     }}
+
     .med-mark-core::before,
     .med-mark-core::after {{
         content: "";
@@ -393,7 +394,7 @@ def apply_custom_css():
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: #8be6c8;
+        background: #356385;
         box-shadow: 0 0 18px rgba(139, 230, 200, 0.8);
     }}
     .dot-a {{ top: 78px; left: 20%; animation: orbitA 7s linear infinite; }}

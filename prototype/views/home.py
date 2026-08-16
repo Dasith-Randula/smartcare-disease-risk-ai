@@ -21,7 +21,7 @@ with col1:
     </div>
     """, unsafe_allow_html=True)
     
-    if st.button("🚀 Predict Patient Risk", type="primary"):
+    if st.button("🚀 Predict Patient Risk", type="primary" ):
         st.switch_page("views/patient_prediction.py")
 
 with col2:
