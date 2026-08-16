@@ -5,7 +5,7 @@ def apply_custom_css():
     is_dark = st.session_state.get('theme', 'Light') == 'Dark'
     
     if is_dark:
-        bg_color = "#08111F"
+        bg_color = "#000000"
         card_bg = "rgba(17,30,48,0.82)"
         text_primary = "#F7F9FC"
         border_color = "rgba(139,114,248,0.2)"
