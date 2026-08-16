@@ -115,12 +115,12 @@ def apply_custom_css():
     .hero-sphere.two {{ width: 18px; height: 18px; right: 12%; top: 28%; background: rgba(206,226,255,0.9); }}
     .hero-sphere.three {{ width: 14px; height: 14px; right: 24%; bottom: 18%; background: rgba(235,227,255,0.8); }}
     .hero-sphere.four {{ width: 20px; height: 20px; left: 20%; bottom: 16%; background: rgba(202,240,241,0.8); }}
-    .page-header {{ display: flex; align-items: center; gap: 0.9rem; margin: 0.2rem 0 1.2rem; }}
-    .page-header-icon {{ display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, rgba(65,105,245,0.12), rgba(112,72,245,0.06)); color: {primary}; border: 1px solid rgba(65,105,245,0.12); }}
+    .smartcare-page-header {{ display: flex; align-items: center; gap: 18px; margin: 0.2rem 0 1.2rem; }}
+    .page-header-icon {{ display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, rgba(65,105,245,0.12), rgba(112,72,245,0.06)); color: {primary}; border: 1px solid rgba(65,105,245,0.12); flex-shrink: 0; }}
     .page-header-copy {{ display: flex; flex-direction: column; gap: 0.2rem; }}
-    .page-header-copy .page-eyebrow {{ font-size: 0.74rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: {primary}; margin: 0; }}
-    .page-header-copy h2 {{ margin: 0; font-size: clamp(1.8rem, 2.4vw, 2.5rem); letter-spacing: -0.05em; }}
-    .page-header-copy p {{ margin: 0; color: {text_soft}; font-size: 1rem; }}
+    .page-eyebrow {{ color: {primary}; font-size: 12px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; margin: 0; }}
+    .page-title {{ color: {text}; font-family: inherit; font-size: 34px; line-height: 1.15; font-weight: 750; margin: 0; }}
+    .page-description {{ color: {text_soft}; font-family: inherit; font-size: 15px; line-height: 1.6; margin-top: 7px; margin-bottom: 0; }}
     .metric-section-title {{ margin: 2.2rem 0 1.1rem 0; font-size: clamp(1.8rem, 2.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.04em; display: inline-block; position: relative; }}
     .metric-section-title::after {{ content: ""; position: absolute; left: 0; bottom: -9px; width: 132px; height: 4px; border-radius: 999px; background: linear-gradient(90deg, {primary}, {lavender}); }}
     .metric-card {{ position: relative; overflow: hidden; padding: 1.5rem 1.3rem; min-height: 160px; transition: all 0.25s ease; background: rgba(255,255,255,0.88); border: 1px solid {border}; border-radius: 22px; box-shadow: {shadow}; }}
@@ -160,22 +160,23 @@ def apply_custom_css():
     st.markdown(css, unsafe_allow_html=True)
 
 
-def render_page_header(title, subtitle, eyebrow=None, icon="info"):
-    """Display a standard page heading inside the SmartCare design system."""
-    eyebrow_html = f"<span class='page-eyebrow'>{eyebrow}</span>" if eyebrow else ""
-    st.markdown(
-        f"""
-        <div class='page-header'>
-            <div class='page-header-icon'>{get_icon_svg(icon, 24, '#4169F5')}</div>
-            <div class='page-header-copy'>
-                {eyebrow_html}
-                <h2>{title}</h2>
-                <p>{subtitle}</p>
-            </div>
+def render_page_header(title, subtitle=None, eyebrow=None, icon="info"):
+    """Render a standard page heading inside the SmartCare design system."""
+    heading_text = subtitle or ""
+    eyebrow_html = f"<div class='page-eyebrow'>{eyebrow}</div>" if eyebrow else ""
+    icon_svg = get_icon_svg(icon, 24, "#4169F5")
+    header_html = f"""
+    <div class='smartcare-page-header'>
+        <div class='page-header-icon'>{icon_svg}</div>
+        <div class='page-header-copy'>
+            {eyebrow_html}
+            <h2 class='page-title'>{title}</h2>
+            <p class='page-description'>{heading_text}</p>
         </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    </div>
+    """
+    st.markdown(header_html, unsafe_allow_html=True)
+    return None
 
 
 def render_footer():
