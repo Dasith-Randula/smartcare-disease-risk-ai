@@ -15,7 +15,7 @@ def apply_custom_css():
         accent = "#3980c3"
         accent_soft = "rgba(57,195,154,0.16)"
         button_bg = "#567991"
-        button_text = "#07110d"
+        button_text = "#ffffff"
         line_color = "rgba(180,197,224,0.24)"
         sidebar_bg = "linear-gradient(180deg, #161616 0%, #0d0d0d 55%, #000000 100%)"
         sidebar_border = "#424445"
@@ -50,9 +50,27 @@ def apply_custom_css():
     css = f"""
     <style>
     [data-testid="stAppViewContainer"],
-    .stApp,
-    .stApp * {{
+    .stApp {{
         font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    }}
+
+    /* Keep Streamlit icon ligatures working after global font override */
+    .material-icons,
+    .material-icons-round,
+    .material-symbols-outlined,
+    .material-symbols-rounded,
+    [class*="material-symbols"] {{
+        font-family: "Material Symbols Rounded", "Material Symbols Outlined", "Material Icons" !important;
+        font-weight: normal;
+        font-style: normal;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        font-feature-settings: "liga";
     }}
 
     :root {{
@@ -244,11 +262,8 @@ def apply_custom_css():
         color: var(--sc-text) !important;
     }}
 
-    .stButton > button,
-    .stFormSubmitButton > button,
-    [data-testid="stBaseButton-primary"],
-    [data-testid="stBaseButton-secondary"] {{
-        color: var(--sc-button-text) !important;
+    .stButton > button {{
+        color: #ffffff !important;
         background: var(--sc-button-bg) !important;
         border: 1px solid color-mix(in srgb, var(--sc-button-bg), #000 18%) !important;
         font-weight: 700 !important;
@@ -256,6 +271,28 @@ def apply_custom_css():
         min-height: 2.7rem;
         padding-left: 1rem !important;
         padding-right: 1rem !important;
+    }}
+    .stButton > button * {{
+        color: #ffffff !important;
+    }}
+
+    .stFormSubmitButton > button {{
+        color: #ffffff !important;
+        background: var(--sc-button-bg) !important;
+        border: 1px solid color-mix(in srgb, var(--sc-button-bg), #000 18%) !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        min-height: 2.7rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }}
+    .stFormSubmitButton > button * {{
+        color: #ffffff !important;
+    }}
+
+    [data-testid="stBaseButton-primary"],
+    [data-testid="stBaseButton-secondary"] {{
+        color: #ffffff !important;
     }}
     .stButton > button:hover,
     .stFormSubmitButton > button:hover,

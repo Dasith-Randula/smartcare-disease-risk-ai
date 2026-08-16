@@ -56,7 +56,7 @@ with st.form("prediction_form"):
         pay_status = col5.selectbox("Payment Status", get_options('Payment Status', ['Paid', 'Pending']))
         pay_method = col6.selectbox("Payment Method", get_options('Payment Method', ['Card', 'Cash', 'Insurance']))
 
-    submitted = st.form_submit_button("🔮 Predict Disease Risk", type="primary")
+    submitted = st.form_submit_button("🔮 Predict Disease Risk")
 
 if submitted:
     input_data = {
