@@ -1,483 +1,190 @@
 import streamlit as st
 
 
+def get_icon_svg(name, size=18, color="currentColor"):
+    """Return a small inline SVG for common dashboard icons."""
+    safe_name = (name or "info").lower().replace(" ", "_")
+
+    svg_map = {
+        "home": "<path d='M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5' />",
+        "info": "<circle cx='12' cy='12' r='9' /><path d='M12 10.5v5' /><circle cx='12' cy='7.5' r='1' />",
+        "analytics": "<path d='M4 18V7m6 11V4m6 14v-8m4 8H4' />",
+        "psychology": "<path d='M9 5.5A3.5 3.5 0 0 1 12.5 9v1.4a3.5 3.5 0 1 1-4 0V9A3.5 3.5 0 0 1 9 5.5Z' /><path d='M14.5 6.5c1.7 0 3 1.3 3 3v3.5c0 1.7-1.3 3-3 3h-1.2c-1.1 0-2.8-1.7-2.8-3.5V9.5c0-1.7 1.3-3 3-3h1Z' /><path d='M9 15.5v3M12 15.5v3M15 15.5v3' />",
+        "query_stats": "<path d='M6 18V8m6 10V4m6 14v-7' /><path d='M3 18h18' />",
+        "health_and_safety": "<path d='M12 21s-7.5-4.35-9.5-8.5C1.2 10.2 2.8 6 7.1 6c2.1 0 3.1 1.1 4.9 2.8C13.8 7.1 14.8 6 16.9 6c4.3 0 5.9 4.2 4.6 6.5C19.5 16.65 12 21 12 21Z' />",
+        "stethoscope": "<path d='M7 4v5a5 5 0 0 0 10 0V4M7 8h10M9 18h6m-3 0v-3' /><path d='M5 8h2m10 0h2' />",
+        "clinical_notes": "<path d='M7 4.5h8a3 3 0 0 1 3 3v11l-4-2.5-4 2.5-4-2.5-4 2.5v-11a3 3 0 0 1 3-3Z' /><path d='M9 9h6M9 12h6' />",
+        "shield": "<path d='M12 3.5 18.5 6v6.2c0 4.5-2.8 7.4-6.5 9.3-3.7-1.9-6.5-4.8-6.5-9.3V6L12 3.5Z' /><path d='m9.5 12 1.7 1.7 3.3-4.2' />",
+        "neurology": "<path d='M7 7.5A4.5 4.5 0 1 1 7 16.5a4.5 4.5 0 0 1 0-9Zm10 0A4.5 4.5 0 1 1 17 16.5a4.5 4.5 0 0 1 0-9Z' /><path d='M10 12h4' />",
+        "hospital": "<path d='M4 20V6.5L12 3l8 3.5V20M8 20v-6h8v6M10 9h.01M14 9h.01M10 12h.01M14 12h.01' />",
+        "monitor_heart": "<path d='M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8A2.5 2.5 0 0 1 17.5 17H14l-1.5 3h-3L9 17H6.5A2.5 2.5 0 0 1 4 14.5v-8Z' /><path d='M8.5 12.5 10.5 10l2.2 2.2 2.8-4.2' />",
+        "medical_services": "<path d='M8 10h8M10 8v4M14 8v4M6 16h12a2 2 0 0 0 2-2V7.5A1.5 1.5 0 0 0 18.5 6H5.5A1.5 1.5 0 0 0 4 7.5V14a2 2 0 0 0 2 2Z' /><path d='M12 18v3' />",
+        "bar_chart": "<path d='M5 18V9m7 9V5m7 13v-7' /><path d='M3 18h18' />",
+        "users": "<path d='M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5 9v-1.2A3.8 3.8 0 0 1 7.8 15h2.4A3.8 3.8 0 0 1 14 18.8V20M15 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm4 11v-1.2a3.8 3.8 0 0 0-3.2-3.7' />",
+        "target": "<circle cx='12' cy='12' r='7' /><circle cx='12' cy='12' r='3.2' /><path d='M12 2v3M12 19v3M2 12h3M19 12h3' />",
+        "default": "<circle cx='12' cy='12' r='8' /><path d='M12 7.5v5l3 2' />"
+    }
+
+    icon = svg_map.get(safe_name, svg_map["default"])
+    return (
+        f"<svg viewBox='0 0 24 24' width='{size}' height='{size}' fill='none' "
+        f"stroke='{color}' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>"
+        f"{icon}</svg>"
+    )
+
+
 def apply_custom_css():
-    """Injects modern dashboard CSS with light/dark parity."""
+    """Centralized design system for the SmartCare dashboard."""
     is_dark = st.session_state.get("theme", "Light") == "Dark"
 
     if is_dark:
-        bg_color = "#101011"
-        bg_accent = "radial-gradient(920px 540px at 92% -5%, rgba(53,210,167,0.16), transparent 62%), radial-gradient(860px 560px at -8% 112%, rgba(88,133,229,0.16), transparent 62%)"
-        card_bg = "#152235"
-        card_shadow = "0 16px 38px rgba(0, 0, 0, 0.34)"
-        text_primary = "#e9eff8"
-        text_muted = "#a7b8cf"
-        border_color = "#2a3a50"
-        accent = "#3980c3"
-        accent_soft = "rgba(57,195,154,0.16)"
-        button_bg = "#567991"
-        button_text = "#ffffff"
-        line_color = "rgba(180,197,224,0.24)"
-        sidebar_bg = "linear-gradient(180deg, #161616 0%, #0d0d0d 55%, #000000 100%)"
-        sidebar_border = "#424445"
-        nav_text = "#dce8f8"
-        nav_hover = "#2A2B2B"
-        nav_active = "#567991"
-        nav_active_text = "#f5fffb"
-        panel_subtle = "#111d2e"
-        input_bg = "#101c2d"
+        bg = "#08111F"
+        card = "rgba(17, 29, 48, 0.88)"
+        text = "#F5F7FF"
+        text_soft = "#A8B3C8"
+        primary = "#7187FF"
+        lavender = "#9A7AFF"
+        cyan = "#38CED0"
+        border = "rgba(155, 171, 210, 0.16)"
+        border_hover = "rgba(113, 135, 255, 0.38)"
+        shadow = "0 18px 42px rgba(3, 7, 18, 0.26)"
+        sidebar = "rgba(11, 18, 31, 0.82)"
+        nav_inactive = "rgba(255,255,255,0.03)"
+        nav_active = "linear-gradient(135deg, #7187FF, #9A7AFF)"
     else:
-        bg_color = "#f6f8fb"
-        bg_accent = "radial-gradient(900px 520px at 100% -8%, rgba(183,233,214,0.35), transparent 62%), radial-gradient(880px 560px at -10% 108%, rgba(203,220,247,0.35), transparent 62%)"
-        card_bg = "#ffffff"
-        card_shadow = "0 12px 28px rgba(16, 35, 57, 0.08)"
-        text_primary = "#1D1E1F"
-        text_muted = "#6a7587"
-        border_color = "#e6ebf2"
-        accent = "#3980c3"
-        accent_soft = "rgba(15,107,90,0.11)"
-        button_bg = "#567991"
-        button_text = "#ffffff"
-        line_color = "rgba(31,42,55,0.12)"
-        sidebar_bg = "#ffffff"
-        sidebar_border = "#e7edf3"
-        nav_text = "#354458"
-        nav_hover = "#f3f7f6"
-        nav_active = "#567991"
-        nav_active_text = "#ffffff"
-        panel_subtle = "#f3f7fa"
-        input_bg = "#fbfdff"
+        bg = "#F6F8FD"
+        card = "rgba(255,255,255,0.88)"
+        text = "#16234A"
+        text_soft = "#66738D"
+        primary = "#4169F5"
+        lavender = "#7048F5"
+        cyan = "#21C1C3"
+        border = "rgba(72, 96, 165, 0.12)"
+        border_hover = "rgba(65, 105, 245, 0.24)"
+        shadow = "0 20px 55px rgba(61, 76, 130, 0.10)"
+        sidebar = "rgba(255,255,255,0.78)"
+        nav_inactive = "rgba(65,105,245,0.03)"
+        nav_active = "linear-gradient(135deg, #4169F5, #7048F5)"
 
     css = f"""
     <style>
-    [data-testid="stAppViewContainer"],
-    .stApp {{
-        font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+    [data-testid="stAppViewContainer"], .stApp {{
+        font-family: "Inter", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at 18% 12%, rgba(65,105,245,0.08), transparent 26%), radial-gradient(circle at 82% 10%, rgba(112,72,245,0.08), transparent 30%), radial-gradient(circle at 76% 78%, rgba(33,193,195,0.05), transparent 28%), {bg};
+        color: {text};
     }}
 
-    .material-icons,
-    .material-icons-round,
-    .material-symbols-outlined,
-    .material-symbols-rounded,
-    [class*="material-symbols"] {{
-        font-family: "Material Symbols Rounded", "Material Symbols Outlined", "Material Icons" !important;
-        font-weight: normal;
-        font-style: normal;
-        letter-spacing: normal;
-        text-transform: none;
-        display: inline-block;
-        white-space: nowrap;
-        word-wrap: normal;
-        direction: ltr;
-        -webkit-font-smoothing: antialiased;
-        font-feature-settings: "liga";
-    }}
-
-    :root {{
-        --sc-bg: {bg_color};
-        --sc-bg-accent: {bg_accent};
-        --sc-card-bg: {card_bg};
-        --sc-card-shadow: {card_shadow};
-        --sc-text: {text_primary};
-        --sc-text-muted: {text_muted};
-        --sc-border: {border_color};
-        --sc-accent: {accent};
-        --sc-accent-soft: {accent_soft};
-        --sc-button-bg: {button_bg};
-        --sc-button-text: {button_text};
-        --sc-line: {line_color};
-        --sc-sidebar-bg: {sidebar_bg};
-        --sc-sidebar-border: {sidebar_border};
-        --sc-nav-text: {nav_text};
-        --sc-nav-hover: {nav_hover};
-        --sc-nav-active: {nav_active};
-        --sc-nav-active-text: {nav_active_text};
-        --sc-panel-subtle: {panel_subtle};
-        --sc-input-bg: {input_bg};
-    }}
-
-    [data-testid="stHeader"] {{
-        background: transparent;
-    }}
-
-    .stApp {{
-        background: var(--sc-bg);
-        background-image: var(--sc-bg-accent);
-        color: var(--sc-text);
-    }}
-
-    .main .block-container {{
-        max-width: 1200px;
-        padding-top: 1.1rem;
-        padding-bottom: 2.4rem;
-    }}
-
-    .stApp p,
-    .stApp li,
-    .stApp span,
-    .stApp label,
-    .stApp h1,
-    .stApp h2,
-    .stApp h3,
-    .stApp h4,
-    .stApp h5,
-    .stApp h6,
-    .stApp div {{
-        color: var(--sc-text);
-    }}
-
-    h1 {{
-        font-size: clamp(2rem, 3.4vw, 3rem) !important;
-        letter-spacing: -0.02em;
-        font-weight: 800;
-        margin-bottom: 0.2rem;
-    }}
-    h2 {{
-        letter-spacing: -0.015em;
-    }}
-    h3 {{
-        letter-spacing: -0.01em;
-    }}
-
-    .glass-card {{
-        background: var(--sc-card-bg);
-        backdrop-filter: blur(12px);
-        border: 1px solid var(--sc-border);
-        border-radius: 18px;
-        padding: 24px;
-        box-shadow: var(--sc-card-shadow);
-        transition: all 0.3s ease;
-        margin-bottom: 18px;
-    }}
-    .glass-card:hover {{
-        transform: translateY(-4px);
-    }}
-
-    .surface-card {{
-        background: var(--sc-panel-subtle);
-        border: 1px solid var(--sc-border);
-        border-radius: 18px;
-        box-shadow: var(--sc-card-shadow);
-        padding: 18px 20px;
-        margin-bottom: 16px;
-        margin-top: 2rem;
-    }}
-    .kpi-card {{
-        border-radius: 16px;
-        border: 1px solid var(--sc-border);
-        box-shadow: var(--sc-card-shadow);
-        padding: 18px;
-        min-height: 118px;
-        margin-top: 1rem;
-    }}
-    .kpi-blue {{ background: linear-gradient(135deg, rgba(157,210,245,0.32), rgba(157,210,245,0.14)); }}
-    .kpi-pink {{ background: linear-gradient(135deg, rgba(236,184,232,0.32), rgba(236,184,232,0.12)); }}
-    .kpi-green {{ background: linear-gradient(135deg, rgba(173,234,196,0.34), rgba(173,234,196,0.12)); }}
-    .kpi-amber {{ background: linear-gradient(135deg, rgba(246,219,168,0.35), rgba(246,219,168,0.12)); }}
-    .kpi-label {{
-        font-size: 0.86rem;
-        font-weight: 600;
-        color: var(--sc-text-muted) !important;
-    }}
-    .kpi-value {{
-        font-size: 2rem;
-        font-weight: 800;
-        line-height: 1.1;
-        margin-top: 0.35rem;
-    }}
-
-    .section-eyebrow {{
-        color: var(--sc-accent) !important;
-        letter-spacing: 0.08em;
-        font-weight: 700;
-        text-transform: uppercase;
-    }}
-    .muted-text {{
-        color: var(--sc-text-muted) !important;
-    }}
-    .insight-title {{
-        color: var(--sc-accent) !important;
-    }}
-    .flow-text {{
-        color: var(--sc-text-muted) !important;
-    }}
-    .metric-title {{
-        color: var(--sc-accent) !important;
-        margin: 0;
-    }}
-    .danger-title {{
-        color: #e85d68 !important;
-    }}
-    .prediction-card {{
-        text-align: center;
-        border-top: 5px solid var(--sc-accent);
-    }}
-
-    [data-testid="stMarkdownContainer"] hr {{
-        border: none;
-        border-top: 1px solid var(--sc-line);
-    }}
-
-    .stTabs [data-baseweb="tab-list"] {{
-        gap: 0.45rem;
-        background: var(--sc-card-bg);
-        border: 1px solid var(--sc-border);
-        border-radius: 14px;
-        padding: 0.35rem;
-        width: fit-content;
-    }}
-    .stTabs [data-baseweb="tab"] {{
-        border-radius: 10px;
-        font-weight: 600;
-        color: var(--sc-text-muted);
-        height: 2.3rem;
-        padding: 0 0.95rem;
-    }}
-    .stTabs [aria-selected="true"] {{
-        background: var(--sc-accent-soft) !important;
-        color: var(--sc-text) !important;
-    }}
-
-    [data-testid="stForm"] {{
-        background: var(--sc-card-bg);
-        border: 1px solid var(--sc-border);
-        border-radius: 18px;
-        padding: 1rem 1rem 0.6rem 1rem;
-        box-shadow: var(--sc-card-shadow);
-    }}
-
-    .stSelectbox > div > div,
-    .stDateInput > div > div,
-    .stNumberInput > div > div,
-    .stTextInput > div > div,
-    [data-baseweb="select"] > div {{
-        background: var(--sc-input-bg) !important;
-        border: 1px solid var(--sc-border) !important;
-        border-radius: 12px !important;
-    }}
-    .stTextInput input,
-    .stNumberInput input,
-    .stDateInput input,
-    [data-baseweb="select"] span {{
-        color: var(--sc-text) !important;
-    }}
-
-    .stButton > button {{
-        color: #ffffff !important;
-        background: var(--sc-button-bg) !important;
-        border: 1px solid color-mix(in srgb, var(--sc-button-bg), #000 18%) !important;
-        font-weight: 700 !important;
-        border-radius: 12px !important;
-        min-height: 2.7rem;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }}
-    .stButton > button * {{
-        color: #ffffff !important;
-    }}
-
-    .stFormSubmitButton > button {{
-        color: #ffffff !important;
-        background: var(--sc-button-bg) !important;
-        border: 1px solid color-mix(in srgb, var(--sc-button-bg), #000 18%) !important;
-        font-weight: 700 !important;
-        border-radius: 12px !important;
-        min-height: 2.7rem;
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
-    }}
-    .stFormSubmitButton > button * {{
-        color: #ffffff !important;
-    }}
-
-    [data-testid="stBaseButton-primary"],
-    [data-testid="stBaseButton-secondary"] {{
-        color: #ffffff !important;
-    }}
-    .stButton > button:hover,
-    .stFormSubmitButton > button:hover,
-    [data-testid="stBaseButton-primary"]:hover,
-    [data-testid="stBaseButton-secondary"]:hover {{
-        filter: brightness(1.05);
-        transform: translateY(-1px);
-    }}
-
-    [data-testid="stProgressBar"] > div {{
-        background: var(--sc-accent-soft) !important;
-        border-radius: 999px;
-    }}
-
-    [data-testid="stSidebar"] {{
-        background: var(--sc-sidebar-bg);
-        border-right: 1px solid var(--sc-sidebar-border);
-    }}
-    [data-testid="stSidebar"] * {{
-        color: var(--sc-nav-text) !important;
-    }}
-    [data-testid="stSidebar"] hr {{
-        border: none;
-        border-top: 1px solid var(--sc-sidebar-border);
-    }}
-
-    [data-testid="stSidebarNav"] {{
-        padding-top: 0.25rem;
-    }}
-    [data-testid="stSidebarNav"] ul {{
-        gap: 0.34rem;
-    }}
-    [data-testid="stSidebarNav"] a,
-    [data-testid="stSidebarNav"] button {{
-        border-radius: 12px !important;
-        padding: 0.46rem 0.68rem !important;
-        border: 1px solid var(--sc-sidebar-border) !important;
-        color: var(--sc-nav-text) !important;
-        transition: all 0.2s ease !important;
-        font-weight: 600;
-    }}
-    [data-testid="stSidebarNav"] a:hover,
-    [data-testid="stSidebarNav"] button:hover {{
-        background: var(--sc-nav-hover) !important;
-        border-color: var(--sc-sidebar-border) !important;
-        transform: translateX(2px);
-    }}
-    [data-testid="stSidebarNav"] a[aria-current="page"],
-    [data-testid="stSidebarNav"] button[aria-current="page"] {{
-        background: var(--sc-nav-active) !important;
-        border-color: var(--sc-nav-active) !important;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-        font-weight: 700 !important;
-    }}
-    [data-testid="stSidebarNav"] a[aria-current="page"] *,
-    [data-testid="stSidebarNav"] button[aria-current="page"] * {{
-        color: var(--sc-nav-active-text) !important;
-    }}
-
-    [data-testid="stSidebar"] [role="radiogroup"] label {{
-        color: var(--sc-nav-text) !important;
-    }}
-    [data-testid="stSidebar"] [role="radiogroup"] > label {{
-        background: color-mix(in srgb, var(--sc-nav-hover), #ffffff 45%);
-        border: 1px solid var(--sc-sidebar-border);
-        border-radius: 10px;
-        padding: 0.35rem 0.55rem;
-        margin-bottom: 0.3rem;
-    }}
-
-    .sidebar-brand {{
-        display: flex;
-        align-items: center;
-        gap: 0.6rem;
-        margin-bottom: 0.2rem;
-    }}
-    .brand-logo {{
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
-        background: var(--sc-accent-soft);
-        border: 1px solid var(--sc-sidebar-border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        color: var(--sc-accent) !important;
-    }}
-    .brand-title {{
-        font-size: 1.12rem;
-        font-weight: 800;
-        color: var(--sc-nav-text) !important;
-    }}
-    .brand-subtitle {{
-        margin-top: -0.15rem;
-        margin-left: 2.65rem;
-        color: color-mix(in srgb, var(--sc-nav-text), #ffffff 20%) !important;
-        font-size: 0.84rem;
-    }}
-
-    .med-mark-wrap {{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 300px;
-        position: relative;
-    }}
-    .med-mark-core {{
-        width: 138px;
-        height: 138px;
-        border-radius: 50%;
-        background: radial-gradient(circle at 28% 25%, #9bc2e3, #3f688e 72%);
-        box-shadow: 0 26px 46px rgba(63, 104, 142, 0.33), inset -12px -12px 24px rgba(6, 10, 18, 0.28);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #f7faff;
-        font-size: 52px;
-        font-weight: 800;
-        z-index: 2;
-        animation: medFloat 5s ease-in-out infinite;
-    }}
-
-    .med-mark-core::before,
-    .med-mark-core::after {{
+    .stApp::before {{
         content: "";
-        position: absolute;
-        border-radius: 50%;
-        border: 1px solid var(--sc-accent-soft);
-        inset: -14px;
-        animation: pulseRing 2.8s ease-out infinite;
-        z-index: 1;
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(rgba(71,103,190,0.045) 1.1px, transparent 1.1px);
+        background-size: 24px 24px;
+        pointer-events: none;
+        opacity: 1;
     }}
-    .med-mark-core::after {{
-        inset: -28px;
-        animation-delay: 1.4s;
-    }}
-    .med-mark-dot {{
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #356385;
-        box-shadow: 0 0 18px rgba(139, 230, 200, 0.8);
-    }}
-    .dot-a {{ top: 78px; left: 20%; animation: orbitA 7s linear infinite; }}
-    .dot-b {{ top: 52px; right: 19%; animation: orbitB 6s linear infinite; }}
-    .dot-c {{ bottom: 64px; left: 62%; animation: orbitC 8s linear infinite; }}
 
-    @keyframes medFloat {{
-        0% {{ transform: translateY(0px); }}
-        50% {{ transform: translateY(-14px); }}
-        100% {{ transform: translateY(0px); }}
-    }}
-    @keyframes pulseRing {{
-        0% {{ transform: scale(0.92); opacity: 0.8; }}
-        100% {{ transform: scale(1.16); opacity: 0; }}
-    }}
-    @keyframes orbitA {{
-        0% {{ transform: translate(0, 0); }}
-        50% {{ transform: translate(18px, -12px); }}
-        100% {{ transform: translate(0, 0); }}
-    }}
-    @keyframes orbitB {{
-        0% {{ transform: translate(0, 0); }}
-        50% {{ transform: translate(-16px, 14px); }}
-        100% {{ transform: translate(0, 0); }}
-    }}
-    @keyframes orbitC {{
-        0% {{ transform: translate(0, 0); }}
-        50% {{ transform: translate(10px, -16px); }}
-        100% {{ transform: translate(0, 0); }}
-    }}
+    .main .block-container {{ max-width: 1500px; padding-top: 1.15rem; padding-bottom: 2.2rem; }}
+    .stHeader {{ background: transparent; }}
+    h1, h2, h3, h4, h5, h6, p, li, span, div, label {{ color: {text}; }}
+    h1 {{ font-size: clamp(3rem, 4vw, 4rem) !important; line-height: 1.05 !important; letter-spacing: -0.06em !important; font-weight: 800 !important; margin: 0 !important; }}
+    h2 {{ font-size: clamp(2rem, 2.6vw, 2.8rem) !important; letter-spacing: -0.04em !important; font-weight: 700 !important; }}
+    h3 {{ font-size: clamp(1.5rem, 2vw, 2.3rem) !important; font-weight: 600 !important; }}
+    .glass-card, .chart-card, [data-testid="stForm"] {{ background: {card}; border: 1px solid {border}; border-radius: 22px; box-shadow: {shadow}; backdrop-filter: blur(14px); }}
+    .glass-card {{ padding: 1.5rem 1.4rem; }}
+    .section-eyebrow {{ display: block; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.19em; text-transform: uppercase; color: {primary} !important; margin: 0 0 0.7rem 0; }}
+    .hero-subtitle {{ margin-top: 0.5rem; margin-bottom: 1.4rem; font-size: clamp(1.5rem, 2vw, 2rem); font-weight: 600; color: #34415F; }}
+    .hero-description {{ display: flex; align-items: center; gap: 0.9rem; background: rgba(255,255,255,.78); border: 1px solid rgba(85,105,165,.10); border-radius: 18px; padding: 1.1rem 1.2rem; box-shadow: 0 12px 30px rgba(56,72,120,.08); max-width: 540px; margin: 0 0 1.4rem 0; }}
+    .hero-description .hero-icon {{ display: inline-flex; align-items: center; justify-content: center; width: 2.6rem; height: 2.6rem; border-radius: 12px; background: rgba(65,105,245,0.08); color: {primary}; }}
+    .hero-description p {{ margin: 0; font-size: 1rem; color: {text_soft}; line-height: 1.5; }}
+    .primary-cta, .stButton > button, .stFormSubmitButton > button {{ background: linear-gradient(135deg, {primary}, {lavender}) !important; color: white !important; border: none !important; border-radius: 14px !important; min-height: 3rem !important; padding: 0.75rem 1.7rem !important; font-weight: 700 !important; box-shadow: 0 12px 26px rgba(78,91,238,.22) !important; transition: transform .22s ease, box-shadow .22s ease, filter .22s ease !important; }}
+    .primary-cta:hover, .stButton > button:hover, .stFormSubmitButton > button:hover {{ transform: translateY(-3px) !important; box-shadow: 0 17px 35px rgba(78,91,238,.30) !important; filter: brightness(1.04) !important; }}
+    .hero-scene {{ position: relative; display: flex; align-items: center; justify-content: center; height: 100%; min-height: 300px; perspective: 1200px; filter: drop-shadow(0 22px 28px rgba(74,100,190,0.14)); animation: heroFloat 6s ease-in-out infinite; }}
+    .hero-platforms {{ position: relative; width: 310px; height: 220px; display: flex; align-items: center; justify-content: center; }}
+    .hero-platform {{ position: absolute; bottom: 18px; width: 230px; height: 74px; border-radius: 28px; background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(198,217,255,0.18)); border: 1px solid rgba(117,142,220,0.16); box-shadow: inset 0 10px 18px rgba(255,255,255,0.8), 0 18px 46px rgba(84,112,200,0.12); transform: perspective(1000px) rotateX(72deg); }}
+    .hero-platform.platform-back {{ width: 200px; bottom: 38px; background: linear-gradient(135deg, rgba(254,255,255,0.82), rgba(195,210,255,0.22)); }}
+    .hero-cube-wrap {{ position: absolute; bottom: 52px; width: 170px; height: 170px; display: flex; align-items: center; justify-content: center; transform: rotateX(18deg) rotateY(-18deg); }}
+    .hero-cube {{ width: 150px; height: 150px; border-radius: 26px; background: rgba(255,255,255,0.28); border: 1px solid rgba(102,148,255,0.30); box-shadow: inset 0 0 26px rgba(255,255,255,0.72), 0 16px 32px rgba(65,105,245,0.12); display: flex; align-items: center; justify-content: center; text-align: center; backdrop-filter: blur(10px); }}
+    .hero-cube span {{ font-size: 3.1rem; font-weight: 800; letter-spacing: -0.05em; background: linear-gradient(135deg, #4169F5, #7048F5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; }}
+    .hero-object {{ position: absolute; width: 20px; height: 20px; border-radius: 14px; display: flex; align-items: center; justify-content: center; color: {primary}; background: rgba(255,255,255,0.82); border: 1px solid rgba(104,122,204,0.18); box-shadow: 0 12px 24px rgba(66,100,170,0.10); }}
+    .hero-object.heart {{ left: 12%; top: 18%; width: 54px; height: 54px; border-radius: 18px; }}
+    .hero-object.cross {{ right: 16%; top: 14%; width: 56px; height: 56px; border-radius: 18px; }}
+    .hero-object.chart {{ right: 10%; bottom: 16%; width: 58px; height: 58px; border-radius: 18px; }}
+    .hero-sphere {{ position: absolute; border-radius: 50%; background: rgba(255,255,255,0.7); box-shadow: 0 0 0 8px rgba(137,173,255,0.06); }}
+    .hero-sphere.one {{ width: 16px; height: 16px; left: 14%; top: 22%; }}
+    .hero-sphere.two {{ width: 18px; height: 18px; right: 12%; top: 28%; background: rgba(206,226,255,0.9); }}
+    .hero-sphere.three {{ width: 14px; height: 14px; right: 24%; bottom: 18%; background: rgba(235,227,255,0.8); }}
+    .hero-sphere.four {{ width: 20px; height: 20px; left: 20%; bottom: 16%; background: rgba(202,240,241,0.8); }}
+    .page-header {{ display: flex; align-items: center; gap: 0.9rem; margin: 0.2rem 0 1.2rem; }}
+    .page-header-icon {{ display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, rgba(65,105,245,0.12), rgba(112,72,245,0.06)); color: {primary}; border: 1px solid rgba(65,105,245,0.12); }}
+    .page-header-copy {{ display: flex; flex-direction: column; gap: 0.2rem; }}
+    .page-header-copy .page-eyebrow {{ font-size: 0.74rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: {primary}; margin: 0; }}
+    .page-header-copy h2 {{ margin: 0; font-size: clamp(1.8rem, 2.4vw, 2.5rem); letter-spacing: -0.05em; }}
+    .page-header-copy p {{ margin: 0; color: {text_soft}; font-size: 1rem; }}
+    .metric-section-title {{ margin: 2.2rem 0 1.1rem 0; font-size: clamp(1.8rem, 2.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.04em; display: inline-block; position: relative; }}
+    .metric-section-title::after {{ content: ""; position: absolute; left: 0; bottom: -9px; width: 132px; height: 4px; border-radius: 999px; background: linear-gradient(90deg, {primary}, {lavender}); }}
+    .metric-card {{ position: relative; overflow: hidden; padding: 1.5rem 1.3rem; min-height: 160px; transition: all 0.25s ease; background: rgba(255,255,255,0.88); border: 1px solid {border}; border-radius: 22px; box-shadow: {shadow}; }}
+    .metric-card:hover {{ transform: translateY(-6px); border-color: {border_hover}; box-shadow: 0 20px 42px rgba(56,73,125,.12); }}
+    .metric-card::after {{ content: ""; position: absolute; right: -14px; bottom: -24px; width: 110px; height: 70px; border: 1px solid rgba(116,133,196,0.18); border-top-left-radius: 80px; border-top-right-radius: 80px; border-bottom: none; transform: rotate(-18deg); opacity: 0.45; }}
+    .metric-icon {{ width: 58px; height: 58px; border-radius: 18px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }}
+    .metric-icon.blue {{ background: #E4EDFF; color: {primary}; }}
+    .metric-icon.cyan {{ background: #DFF7F7; color: {cyan}; }}
+    .metric-icon.purple {{ background: #EEE6FF; color: {lavender}; }}
+    .metric-value {{ font-size: clamp(2rem, 2.5vw, 3rem); font-weight: 800; letter-spacing: -0.06em; margin: 0; line-height: 1; }}
+    .metric-label {{ margin-top: 0.5rem; color: {text_soft} !important; font-size: 1rem; font-weight: 600; }}
+    [data-testid="stSidebar"] {{ background: {sidebar}; border-right: 1px solid {border}; backdrop-filter: blur(18px); }}
+    [data-testid="stSidebar"] * {{ color: {text} !important; }}
+    [data-testid="stSidebarNav"] {{ padding-top: 0.4rem; }}
+    [data-testid="stSidebarNav"] ul {{ gap: 0.54rem; }}
+    [data-testid="stSidebarNav"] a, [data-testid="stSidebarNav"] button {{ border-radius: 14px !important; border: 1px solid {border} !important; padding: 0.7rem 0.8rem !important; background: transparent !important; transition: all 0.22s ease !important; font-weight: 600 !important; color: {text} !important; }}
+    [data-testid="stSidebarNav"] a:hover, [data-testid="stSidebarNav"] button:hover {{ background: {nav_inactive} !important; transform: translateX(4px); border-color: {border_hover} !important; }}
+    [data-testid="stSidebarNav"] a[aria-current="page"], [data-testid="stSidebarNav"] button[aria-current="page"] {{ background: {nav_active} !important; border: none !important; box-shadow: 0 12px 26px rgba(78,91,238,.18); color: white !important; }}
+    .sidebar-brand {{ display: flex; align-items: center; gap: 0.75rem; padding: 0.1rem 0.2rem 0.5rem 0.2rem; }}
+    .brand-logo {{ width: 40px; height: 40px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, {primary}, {lavender}); color: white; box-shadow: 0 12px 24px rgba(78,91,238,.18); }}
+    .brand-title {{ font-size: 1.15rem; font-weight: 800; }}
+    .brand-subtitle {{ margin-left: 3.15rem; font-size: 0.8rem; color: {text_soft} !important; font-weight: 500; }}
+    .sidebar-card {{ background: rgba(255,255,255,0.58); border: 1px solid {border}; border-radius: 18px; padding: 0.9rem 0.8rem; margin-top: 1rem; color: {text_soft}; font-size: 0.84rem; line-height: 1.5; }}
+    [data-testid="stSidebar"] [role="radiogroup"] label {{ color: {text_soft}; }}
+    [data-testid="stSidebar"] [role="radiogroup"] > label {{ background: rgba(255,255,255,0.5); border: 1px solid {border}; border-radius: 10px; padding: 0.38rem 0.55rem; }}
+    [data-testid="stSidebar"] [role="radiogroup"] [aria-checked="true"] {{ background: linear-gradient(135deg, {primary}, {lavender}) !important; color: white !important; border-color: transparent !important; }}
+    [data-testid="stForm"] {{ background: rgba(255,255,255,0.88); border-radius: 24px; border: 1px solid {border}; box-shadow: 0 14px 38px rgba(54,70,120,.08); padding: 1.2rem 1rem 0.8rem; }}
+    .stTabs [data-baseweb="tab-list"] {{ gap: 0.5rem; padding: 0.35rem; border-radius: 16px; border: 1px solid {border}; background: rgba(255,255,255,0.54); }}
+    .stTabs [data-baseweb="tab"] {{ border-radius: 12px !important; background: transparent; color: {text_soft}; font-weight: 600; padding: 0.5rem 1rem; }}
+    .stTabs [aria-selected="true"] {{ background: linear-gradient(135deg, rgba(65,105,245,0.10), rgba(112,72,245,0.08)) !important; color: {text} !important; border: 1px solid rgba(65,105,245,0.18); }}
+    .stTextInput > div > div, .stNumberInput > div > div, .stSelectbox > div > div, .stDateInput > div > div {{ background: #F4F7FC !important; border: 1px solid #E5EAF5 !important; border-radius: 12px !important; }}
+    .stTextInput input, .stNumberInput input, .stSelectbox div[role="combobox"], .stDateInput input {{ color: {text} !important; background: transparent !important; }}
+    .stTextInput input:focus, .stNumberInput input:focus, .stSelectbox div[role="combobox"]:focus-within {{ border-color: #5984FF !important; box-shadow: 0 0 0 3px rgba(89,132,255,.11) !important; }}
+    @keyframes heroFloat {{ 0%, 100% {{ transform: translateY(0px); }} 50% {{ transform: translateY(-10px); }} }}
     </style>
     """
     st.markdown(css, unsafe_allow_html=True)
 
 
+def render_page_header(title, subtitle, eyebrow=None, icon="info"):
+    """Display a standard page heading inside the SmartCare design system."""
+    eyebrow_html = f"<span class='page-eyebrow'>{eyebrow}</span>" if eyebrow else ""
+    st.markdown(
+        f"""
+        <div class='page-header'>
+            <div class='page-header-icon'>{get_icon_svg(icon, 24, '#4169F5')}</div>
+            <div class='page-header-copy'>
+                {eyebrow_html}
+                <h2>{title}</h2>
+                <p>{subtitle}</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_footer():
     st.markdown(
         """
-    <div class='muted-text' style='text-align: center; margin-top: 50px; padding: 20px; font-size: 14px;'>
-        SmartCare AI | Disease Risk Prediction System<br>
-        AI Powered. Data Driven. Better Decisions.
-    </div>
-    """,
+        <div style='text-align: center; margin-top: 42px; padding: 18px 12px 8px; color: var(--text-muted); font-size: 14px; border-top: 1px solid rgba(79,111,247,0.10);'>
+            SmartCare AI | Disease Risk Prediction System<br>
+            AI Powered. Data Driven. Better Decisions.
+        </div>
+        """,
         unsafe_allow_html=True,
     )

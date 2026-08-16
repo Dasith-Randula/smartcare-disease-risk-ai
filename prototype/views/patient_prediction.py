@@ -7,10 +7,10 @@ from utils.model_utils import (
     predict_risk,
     validate_prepared_dataframe,
 )
-from utils.ui_utils import render_footer
+from utils.ui_utils import render_footer, render_page_header
 
-st.title("Patient Disease Risk Prediction")
-st.markdown("Enter patient details to estimate the disease-risk category.")
+st.markdown("<div class='section-eyebrow'>Clinical Input</div>", unsafe_allow_html=True)
+render_page_header("Patient Disease Risk Prediction", "Enter patient details to estimate the disease-risk category.", icon="stethoscope")
 
 raw_df = load_dataset()
 
