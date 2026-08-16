@@ -1,7 +1,7 @@
 import streamlit as st
 from utils.ui_utils import render_footer
 
-st.markdown("<h4 style='color: #6C5CE7;'>AI-Powered Healthcare Intelligence</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='color: #7e948a;'>AI-Powered Healthcare Intelligence</h4>", unsafe_allow_html=True)
 st.title("SmartCare AI")
 st.subheader("Disease Risk Prediction System")
 

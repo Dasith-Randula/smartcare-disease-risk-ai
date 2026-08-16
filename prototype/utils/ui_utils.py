@@ -7,12 +7,12 @@ def apply_custom_css():
     if is_dark:
         bg_color = "#000000"
         card_bg = "rgba(17,30,48,0.82)"
-        text_primary = "#F7F9FC"
+        text_primary = "#FFFFFF"
         border_color = "rgba(139,114,248,0.2)"
     else:
-        bg_color = "#F4F7FC"
+        bg_color = "#FFFFFF"
         card_bg = "rgba(255,255,255,0.78)"
-        text_primary = "#172033"
+        text_primary = "#000000"
         border_color = "rgba(108,92,231,0.12)"
 
     css = f"""
@@ -27,7 +27,7 @@ def apply_custom_css():
         background: {card_bg};
         backdrop-filter: blur(12px);
         border: 1px solid {border_color};
-        border-radius: 16px;
+        border-radius: 8px;
         padding: 24px;
         box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
         transition: all 0.3s ease;
@@ -46,11 +46,11 @@ def apply_custom_css():
         height: 300px;
     }}
     .orb {{
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
-        background: radial-gradient(circle at 30% 30%, #6C5CE7, #4F8DF7);
-        box-shadow: 0 20px 40px rgba(108,92,231,0.4), inset -20px -20px 40px rgba(0,0,0,0.2);
+        background: radial-gradient(circle at 30% 30%, #7e948a, #7e948a);
+        box-shadow: 0 20px 40px rgba(126, 148, 138, 1), inset -20px -20px 40px rgba(0,0,0,0.2);
         animation: float 4s ease-in-out infinite;
         display: flex;
         justify-content: center;
@@ -70,7 +70,7 @@ def apply_custom_css():
 
 def render_footer():
     st.markdown("""
-    <div style='text-align: center; margin-top: 50px; padding: 20px; color: #667085; font-size: 14px;'>
+    <div style='text-align: center; margin-top: 50px; padding: 20px; color: #9399a3; font-size: 14px;'>
         SmartCare AI | Disease Risk Prediction System<br>
         AI Powered. Data Driven. Better Decisions.
     </div>

@@ -5,22 +5,22 @@ st.title("About & Disclaimer")
 
 st.markdown("""
 <div class='glass-card'>
-    <h3 style='color: #6C5CE7;'>About SmartCare AI</h3>
+    <h3 style='color: #7e948a;'>About SmartCare AI</h3>
     <p>A machine-learning clinical decision-support prototype that classifies patient disease risk into Low, Medium, or High categories using SmartCare hospital data.</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class='glass-card'>
-    <h3 style='color: #6C5CE7;'>Technology Stack</h3>
+    <h3 style='color: #7e948a;'>Technology Stack</h3>
     <p>Python • Streamlit • Scikit-Learn • XGBoost • Pandas • Joblib</p>
 </div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
 <div class='glass-card' style='text-align: center;'>
-    <h3 style='color: #6C5CE7;'>System Flow</h3>
-    <h4 style='color: #4F8DF7;'>Patient Data ➔ Preprocessing ➔ Machine Learning Model ➔ Disease Risk Prediction</h4>
+    <h3 style='color: #4d665b;'>System Flow</h3>
+    <h5 style='color: #454746;'>Patient Data ➔ Preprocessing ➔ Machine Learning Model ➔ Disease Risk Prediction</h5>
 </div>
 """, unsafe_allow_html=True)
 
