@@ -3,7 +3,7 @@ import streamlit as st
 def apply_custom_css():
     """Injects custom CSS for glassmorphism and 3D effects based on active theme."""
     is_dark = st.session_state.get('theme', 'Light') == 'Dark'
-    
+
     if is_dark:
         bg_color = "#000000"
         card_bg = "rgba(17,30,48,0.82)"
@@ -37,7 +37,6 @@ def apply_custom_css():
         transform: translateY(-3px);
         box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
     }}
-    /* 3D Orb for Home */
     .orb-container {{
         perspective: 1000px;
         display: flex;
@@ -56,8 +55,9 @@ def apply_custom_css():
         justify-content: center;
         align-items: center;
         color: white;
-        font-size: 40px;
-        font-weight: bold;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
     }}
     @keyframes float {{
         0% {{ transform: translateY(0px) rotate(0deg); }}
