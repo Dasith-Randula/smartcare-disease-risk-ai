@@ -4,8 +4,9 @@ from utils.ui_utils import render_footer
 st.title("Prediction Result")
 
 if 'last_prediction' not in st.session_state:
-    st.warning("No prediction found. Please submit a patient profile first.")
-    st.button("Go to Prediction", on_click=lambda: st.switch_page("views/patient_prediction.py"))
+    st.info("No prediction is available yet. Enter patient information to generate a disease-risk prediction.")
+    if st.button("Go to Patient Prediction", icon=":material/clinical_notes:"):
+        st.switch_page("views/patient_prediction.py")
 else:
     result_data = st.session_state['last_prediction']
     pred = result_data['result']

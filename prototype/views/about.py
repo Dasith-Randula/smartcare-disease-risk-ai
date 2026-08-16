@@ -26,7 +26,7 @@ st.markdown("""
 
 st.markdown("""
 <div class='glass-card' style='border-left: 5px solid #E85D68;'>
-    <h3 style='color: #E85D68;'>⚠️ Disclaimer</h3>
+    <h3 style='color: #E85D68;'>Disclaimer</h3>
     <p>This system was developed for educational and research purposes. It is a decision-support prototype and must not replace professional medical diagnosis, treatment, or clinical judgement.</p>
 </div>
 """, unsafe_allow_html=True)
