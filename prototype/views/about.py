@@ -5,7 +5,7 @@ render_page_header("About the System", "AI-driven clinical decision support for 
 
 st.markdown(
     """
-    <div class='glass-card' style='padding: 1.3rem 1.4rem; border-left: 5px solid #4F6FF7; border-radius: 22px;'>
+    <div class='glass-card' style='padding: 1.3rem 1.4rem; border-left: 5px solid var(--primary); border-radius: 22px;'>
         <h3 style='margin: 0 0 0.6rem;'>About SmartCare AI</h3>
         <p style='margin: 0; color: var(--text-secondary);'>A machine-learning clinical decision-support prototype that classifies patient disease risk into Low, Medium, or High categories using SmartCare hospital data.</p>
     </div>
@@ -18,12 +18,12 @@ st.markdown(
     <div class='glass-card' style='padding: 1.3rem 1.4rem; border-radius: 22px;'>
         <h3 style='margin: 0 0 0.9rem;'>Technology Stack</h3>
         <div style='display: flex; flex-wrap: wrap; gap: 0.55rem;'>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(79,111,247,0.08); border: 1px solid rgba(79,111,247,0.14); font-weight: 600;'>Python</span>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(114,87,246,0.08); border: 1px solid rgba(114,87,246,0.14); font-weight: 600;'>Streamlit</span>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(40,184,213,0.08); border: 1px solid rgba(40,184,213,0.14); font-weight: 600;'>Scikit-Learn</span>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(79,111,247,0.08); border: 1px solid rgba(79,111,247,0.14); font-weight: 600;'>Pandas</span>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(114,87,246,0.08); border: 1px solid rgba(114,87,246,0.14); font-weight: 600;'>Joblib</span>
-            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(40,184,213,0.08); border: 1px solid rgba(40,184,213,0.14); font-weight: 600;'>XGBoost</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.14); font-weight: 600;'>Python</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(5, 150, 105, 0.08); border: 1px solid rgba(5, 150, 105, 0.14); font-weight: 600;'>Streamlit</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(40, 184, 213, 0.08); border: 1px solid rgba(40, 184, 213, 0.14); font-weight: 600;'>Scikit-Learn</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.14); font-weight: 600;'>Pandas</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(5, 150, 105, 0.08); border: 1px solid rgba(5, 150, 105, 0.14); font-weight: 600;'>Joblib</span>
+            <span style='padding: 0.46rem 0.75rem; border-radius: 999px; background: rgba(40, 184, 213, 0.08); border: 1px solid rgba(40, 184, 213, 0.14); font-weight: 600;'>XGBoost</span>
         </div>
     </div>
     """,
@@ -37,7 +37,7 @@ for idx, label in enumerate(labels):
         st.markdown(
             f"""
             <div class='glass-card' style='padding: 1rem; text-align: center; border-radius: 18px; min-height: 110px; display: flex; flex-direction: column; justify-content: center;'>
-                <div style='font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F6FF7;'>Step {idx+1}</div>
+                <div style='font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--primary);'>Step {idx+1}</div>
                 <div style='font-size: 1.05rem; font-weight: 700; margin-top: 0.5rem;'>{label}</div>
             </div>
             """,

@@ -11,7 +11,7 @@ with hero_left:
     st.markdown(
         f"""
         <div class='hero-description'>
-            <div class='hero-icon'>{get_icon_svg('shield', 22, '#4169F5')}</div>
+            <div class='hero-icon'>{get_icon_svg('shield', 22, 'var(--primary)')}</div>
             <p>A machine-learning clinical decision-support prototype that classifies patient disease risk into Low, Medium, or High categories using SmartCare hospital data.</p>
         </div>
         """,
@@ -31,9 +31,9 @@ with hero_right:
                 <div class='hero-cube-wrap'>
                     <div class='hero-cube'><span>AI</span></div>
                 </div>
-                <div class='hero-object heart'>{get_icon_svg('monitor_heart', 26, '#4169F5')}</div>
-                <div class='hero-object cross'>{get_icon_svg('medical_services', 24, '#4169F5')}</div>
-                <div class='hero-object chart'>{get_icon_svg('bar_chart', 22, '#4169F5')}</div>
+                <div class='hero-object heart'>{get_icon_svg('monitor_heart', 26, 'var(--primary)')}</div>
+                <div class='hero-object cross'>{get_icon_svg('medical_services', 24, 'var(--primary)')}</div>
+                <div class='hero-object chart'>{get_icon_svg('bar_chart', 22, 'var(--primary)')}</div>
                 <div class='hero-sphere one'></div>
                 <div class='hero-sphere two'></div>
                 <div class='hero-sphere three'></div>
@@ -51,7 +51,7 @@ with m1:
     st.markdown(
         f"""
         <div class='metric-card'>
-            <div class='metric-icon blue'>{get_icon_svg('users', 28, '#4169F5')}</div>
+            <div class='metric-icon blue'>{get_icon_svg('users', 28, 'var(--primary)')}</div>
             <div class='metric-value'>1,000</div>
             <div class='metric-label'>Patient Records</div>
         </div>

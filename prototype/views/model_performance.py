@@ -18,8 +18,8 @@ def show_img(filename):
 
 st.markdown(
     """
-    <div class='glass-card' style='padding: 1.15rem 1.3rem; border-left: 5px solid #4F6FF7; border-radius: 20px;'>
-        <div style='font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #4F6FF7;'>Best Performing Model</div>
+    <div class='glass-card' style='padding: 1.15rem 1.3rem; border-left: 5px solid var(--primary); border-radius: 20px;'>
+        <div style='font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary);'>Best Performing Model</div>
         <h3 style='margin: 0.45rem 0 0;'>Logistic Regression</h3>
     </div>
     """,
@@ -33,9 +33,9 @@ with col2:
     show_img("best_model_confusion_matrix.png")
 
 m1, m2, m3, m4 = st.columns(4)
-m1.markdown(f"<div class='metric-card'><div class='metric-icon blue'>{get_icon_svg('target', 26, '#4169F5')}</div><div class='metric-value'>94.5%</div><div class='metric-label'>Accuracy</div></div>", unsafe_allow_html=True)
+m1.markdown(f"<div class='metric-card'><div class='metric-icon blue'>{get_icon_svg('target', 26, 'var(--primary)')}</div><div class='metric-value'>94.5%</div><div class='metric-label'>Accuracy</div></div>", unsafe_allow_html=True)
 m2.markdown(f"<div class='metric-card'><div class='metric-icon cyan'>{get_icon_svg('query_stats', 26, '#21C1C3')}</div><div class='metric-value'>0.9397</div><div class='metric-label'>Macro Precision</div></div>", unsafe_allow_html=True)
 m3.markdown(f"<div class='metric-card'><div class='metric-icon purple'>{get_icon_svg('analytics', 26, '#7048F5')}</div><div class='metric-value'>0.9220</div><div class='metric-label'>Macro Recall</div></div>", unsafe_allow_html=True)
-m4.markdown(f"<div class='metric-card'><div class='metric-icon blue'>{get_icon_svg('info', 26, '#4169F5')}</div><div class='metric-value'>0.9303</div><div class='metric-label'>Macro F1</div></div>", unsafe_allow_html=True)
+m4.markdown(f"<div class='metric-card'><div class='metric-icon blue'>{get_icon_svg('info', 26, 'var(--primary)')}</div><div class='metric-value'>0.9303</div><div class='metric-label'>Macro F1</div></div>", unsafe_allow_html=True)
 
 render_footer()
