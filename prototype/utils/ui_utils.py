@@ -1,8 +1,5 @@
 import streamlit as st
 
-
-
-
 def get_icon_svg(name, size=18, color="currentColor"):
     """Return a small inline SVG for common dashboard icons."""
     safe_name = (name or "info").lower().replace(" ", "_")
